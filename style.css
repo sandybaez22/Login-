@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    height: 100vh;
+}
+
+
+/* CONTENEDOR PRINCIPAL */
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+
+/* LADO IZQUIERDO */
+
+.image-side {
+    flex: 1;
+    background: url("login.jpg") center/cover no-repeat;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.image-side h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+
+/* LADO DERECHO */
+
+.login-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f4f4f4;
+}
+
+
+/* CAJA LOGIN */
+
+.login-box {
+    background: white;
+    padding: 50px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+/* BOTON */
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #2a5298;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #1e3c72;
+}
+
+
+/* TEXTO REGISTRO */
+
+.register-text {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.register-text a {
+    color: #2a5298;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+    .image-side {
+        display: none;
+    }
+    .login-side {
+        flex: 1;
+    }
+}
+
+.message {
+    margin-top: 15px;
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}
+
+.message {
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.loader {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #3498db;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
