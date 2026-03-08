@@ -22,7 +22,7 @@ body {
 
 .image-side {
     flex: 1;
-    background: url("login.jpg") center/cover no-repeat;
+    background: url("Login.jpg") center/cover no-repeat;
     color: white;
     display: flex;
     flex-direction: column;
