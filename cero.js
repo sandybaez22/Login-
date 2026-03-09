@@ -1,10 +1,18 @@
 const cells = document.querySelectorAll(".cell");
-const statusText = document.querySelector("#status");
-const restartBtn = document.querySelector("#restart");
+const statusText = document.getElementById("status");
+const restartBtn = document.getElementById("restart");
+const backBtn = document.getElementById("back");
 
-let currentPlayer = "X";
+const menu = document.getElementById("menu");
+const game = document.getElementById("game");
+
+const vsPC = document.getElementById("vs-pc");
+const vsPlayer = document.getElementById("vs-player");
+
 let board = ["", "", "", "", "", "", "", "", ""];
+let currentPlayer = "X";
 let gameActive = true;
+let mode = "";
 
 const winConditions = [
     [0, 1, 2],
@@ -17,13 +25,25 @@ const winConditions = [
     [2, 4, 6]
 ];
 
-statusText.textContent = "Turno de: " + currentPlayer;
+vsPC.addEventListener("click", () => {
+    mode = "pc";
+    startGame();
+});
+
+vsPlayer.addEventListener("click", () => {
+    mode = "player";
+    startGame();
+});
+
+function startGame() {
+    menu.style.display = "none";
+    game.style.display = "block";
+    statusText.textContent = "Turno de: " + currentPlayer;
+}
 
 cells.forEach(cell => {
     cell.addEventListener("click", cellClick);
 });
-
-restartBtn.addEventListener("click", restartGame);
 
 function cellClick() {
 
@@ -38,56 +58,94 @@ function cellClick() {
 
     checkWinner();
 
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+    if (gameActive) {
+        statusText.textContent = "Turno de: " + currentPlayer;
+    }
+
+    if (mode === "pc" && currentPlayer === "O" && gameActive) {
+        setTimeout(pcMove, 500);
+    }
+
+}
+
+function pcMove() {
+
+    let empty = [];
+
+    board.forEach((cell, index) => {
+        if (cell === "") {
+            empty.push(index);
+        }
+    });
+
+    let random = empty[Math.floor(Math.random() * empty.length)];
+
+    board[random] = "O";
+    cells[random].textContent = "O";
+
+    checkWinner();
+
+    currentPlayer = "X";
+    statusText.textContent = "Turno de: X";
+
 }
 
 function checkWinner() {
 
-    let roundWon = false;
+    for (let condition of winConditions) {
 
-    for (let i = 0; i < winConditions.length; i++) {
+        let a = board[condition[0]];
+        let b = board[condition[1]];
+        let c = board[condition[2]];
 
-        const condition = winConditions[i];
+        if (a !== "" && a === b && b === c) {
 
-        const a = board[condition[0]];
-        const b = board[condition[1]];
-        const c = board[condition[2]];
+            if (mode === "pc") {
 
-        if (a === "" || b === "" || c === "") {
-            continue;
+                if (a === "X") {
+                    statusText.textContent = "¡Ganaste! 🎉";
+                } else {
+                    statusText.textContent = "¡La máquina gana! 🤖";
+                }
+            } else {
+                statusText.textContent = "¡Jugador " + a + " gana! 🎉";
+            }
+
+            gameActive = false;
+            return;
         }
 
-        if (a === b && b === c) {
-            roundWon = true;
-            break;
-        }
-
-    }
-
-    if (roundWon) {
-        statusText.textContent = "Ganó " + currentPlayer + " 🎉";
-        gameActive = false;
-        return;
     }
 
     if (!board.includes("")) {
         statusText.textContent = "Empate 🤝";
         gameActive = false;
-        return;
     }
 
-    currentPlayer = currentPlayer === "X" ? "O" : "X";
-    statusText.textContent = "Turno de: " + currentPlayer;
-
 }
 
-function restartGame() {
+restartBtn.addEventListener("click", () => {
 
     board = ["", "", "", "", "", "", "", "", ""];
-    gameActive = true;
-    currentPlayer = "X";
-
-    statusText.textContent = "Turno de: " + currentPlayer;
-
     cells.forEach(cell => cell.textContent = "");
 
-}
+    currentPlayer = "X";
+    gameActive = true;
+
+    statusText.textContent = "Turno de: X";
+
+});
+
+backBtn.addEventListener("click", () => {
+    menu.style.display = "block";
+    game.style.display = "none";
+
+    board = ["", "", "", "", "", "", "", "", ""];
+    cells.forEach(cell => cell.textContent = "");
+
+    currentPlayer = "X";
+    gameActive = true;
+    statusText.textContent = "";
+});

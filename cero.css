@@ -80,3 +80,32 @@ button {
 button:hover {
     background: #0095cc;
 }
+
+#menu {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+#menu button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: #00c6ff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+#menu button:hover {
+    background: #0095cc;
+}
+
+#back {
+    background: #ff5c5c;
+    margin-top: 10px;
+}
+
+#back:hover {
+    background: #e04444;
+}
