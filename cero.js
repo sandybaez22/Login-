@@ -55,6 +55,7 @@ function cellClick() {
 
     board[index] = currentPlayer;
     this.textContent = currentPlayer;
+    this.classList.add(currentPlayer);
 
     checkWinner();
 
@@ -84,11 +85,16 @@ function pcMove() {
 
     board[random] = "O";
     cells[random].textContent = "O";
+    cells[random].classList.add("O");
 
     checkWinner();
 
-    currentPlayer = "X";
-    statusText.textContent = "Turno de: X";
+    /* si el juego sigue */
+
+    if (gameActive) {
+        currentPlayer = "X";
+        statusText.textContent = "Turno de: X";
+    }
 
 }
 
@@ -129,7 +135,10 @@ function checkWinner() {
 restartBtn.addEventListener("click", () => {
 
     board = ["", "", "", "", "", "", "", "", ""];
-    cells.forEach(cell => cell.textContent = "");
+    cells.forEach(cell => {
+        cell.textContent = "";
+        cell.classList.remove("X", "O");
+    });
 
     currentPlayer = "X";
     gameActive = true;

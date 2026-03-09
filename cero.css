@@ -109,3 +109,17 @@ button:hover {
 #back:hover {
     background: #e04444;
 }
+
+
+/* Color X */
+
+.cell.X {
+    color: #2196f3;
+}
+
+
+/* Color O */
+
+.cell.O {
+    color: #ff5252;
+}
