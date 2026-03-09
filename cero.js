@@ -59,16 +59,14 @@ function cellClick() {
 
     checkWinner();
 
-    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    if (!gameActive) return;
 
-    if (gameActive) {
-        statusText.textContent = "Turno de: " + currentPlayer;
-    }
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    statusText.textContent = "Turno de: " + currentPlayer;
 
     if (mode === "pc" && currentPlayer === "O" && gameActive) {
         setTimeout(pcMove, 500);
     }
-
 }
 
 function pcMove() {
@@ -89,13 +87,10 @@ function pcMove() {
 
     checkWinner();
 
-    /* si el juego sigue */
-
     if (gameActive) {
         currentPlayer = "X";
         statusText.textContent = "Turno de: X";
     }
-
 }
 
 function checkWinner() {
@@ -115,26 +110,28 @@ function checkWinner() {
                 } else {
                     statusText.textContent = "¡La máquina gana! 🤖";
                 }
+
             } else {
+
                 statusText.textContent = "¡Jugador " + a + " gana! 🎉";
+
             }
 
             gameActive = false;
             return;
         }
-
     }
 
     if (!board.includes("")) {
         statusText.textContent = "Empate 🤝";
         gameActive = false;
     }
-
 }
 
 restartBtn.addEventListener("click", () => {
 
     board = ["", "", "", "", "", "", "", "", ""];
+
     cells.forEach(cell => {
         cell.textContent = "";
         cell.classList.remove("X", "O");
@@ -144,17 +141,22 @@ restartBtn.addEventListener("click", () => {
     gameActive = true;
 
     statusText.textContent = "Turno de: X";
-
 });
 
 backBtn.addEventListener("click", () => {
+
     menu.style.display = "block";
     game.style.display = "none";
 
     board = ["", "", "", "", "", "", "", "", ""];
-    cells.forEach(cell => cell.textContent = "");
+
+    cells.forEach(cell => {
+        cell.textContent = "";
+        cell.classList.remove("X", "O");
+    });
 
     currentPlayer = "X";
     gameActive = true;
+
     statusText.textContent = "";
 });

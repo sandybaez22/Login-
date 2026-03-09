@@ -111,15 +111,14 @@ button:hover {
 }
 
 
-/* Color X */
+/* ESTILOS De COLORES PARA X Y O */
 
 .cell.X {
-    color: #2196f3;
+    color: blue;
+    font-weight: bold;
 }
 
-
-/* Color O */
-
 .cell.O {
-    color: #ff5252;
+    color: red;
+    font-weight: bold;
 }
